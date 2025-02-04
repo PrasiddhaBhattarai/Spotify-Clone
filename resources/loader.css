@@ -1,0 +1,70 @@
+
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out;
+}
+
+/* Equalizer container */
+.equalizer {
+    display: flex;
+    justify-content: space-between;
+    width: 200px; /* Can adjust width for more or fewer bars */
+    height: 120px;
+}
+
+/* Equalizer bars */
+.bar {
+    width: 10%;
+    height: 80%;
+    background-color: #ffffff;
+    animation: bounce 0.7s ease-in-out infinite;
+}
+
+/* Different animation delays for each bar */
+.bar:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.bar:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.bar:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.bar:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.bar:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+
+/* Bouncing effect for the equalizer bars */
+@keyframes bounce {
+    0% {
+        transform: scaleY(0.7);
+    }
+    50% {
+        transform: scaleY(1.9);
+    }
+    100% {
+        transform: scaleY(0.7);
+    }
+}
+
+/* Disable the animation once the loader is hidden */
+.loader-wrapper.loaded .equalizer .bar {
+    animation: none; /* Stop the animation */
+}
