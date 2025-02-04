@@ -211,20 +211,20 @@ let currPlaylist = null;
 
 async function getSongs() {
     try {
-        let a = await fetch("./albums/");
+        let a = await fetch("albums/");
         let response = await a.text();
         let div = document.createElement("div");
         div.innerHTML = response;
         let anchors = div.getElementsByTagName("a");
 
         for (const e of Array.from(anchors)) {
-            if (e.href.includes("/albums/")) {
+            if (e.href.includes("albums/")) {
                 let album = e.href.split("/").slice(-1)[0];
                 let songs = [];
 
-                let json = await fetch(`/albums/${album}/info.json`);
+                let json = await fetch(`albums/${album}/info.json`);
                 let response = await json.json();
-                let img = await fetch(`/albums/${album}/album%20cover.jpeg`);
+                let img = await fetch(`albums/${album}/album%20cover.jpeg`);
 
                 let fetchSongs = await fetch(`${e.href}/`);
                 let res = await fetchSongs.text();
