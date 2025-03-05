@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clone.Spotify</title>
+    <link rel="stylesheet" href="/resources/utility.css">
+    <link rel="stylesheet" href="/resources/style.css">
+    <link rel="stylesheet" href="/resources/loader.css">
+    <link rel="icon" href="/resources/favicon.png" type="image/png">
+</head>
+
+<body>
+    <!-- SVG manager -->
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="hide" data-encore-id="icon" role="img">
+        <defs>
+            <symbol id="home-filled">
+                <path
+                    d="M13.5 1.515a3 3 0 0 0-3 0L3 5.845a2 2 0 0 0-1 1.732V21a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6h4v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7.577a2 2 0 0 0-1-1.732l-7.5-4.33z"
+                    fill="white">
+                </path>
+            </symbol>
+
+            <symbol id="home-hollow">
+                <path
+                    d="M12.5 3.247a1 1 0 0 0-1 0L4 7.577V20h4.5v-6a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v6H20V7.577l-7.5-4.33zm-2-1.732a3 3 0 0 1 3 0l7.5 4.33a2 2 0 0 1 1 1.732V21a1 1 0 0 1-1 1h-6.5a1 1 0 0 1-1-1v-6h-3v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.577a2 2 0 0 1 1-1.732l7.5-4.33z"
+                    fill="rgb(179,179,179)">
+                </path>
+            </symbol>
+
+            <symbol id="browse-filled">
+                <path
+                    d="M4 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4H4V2zM1.513 9.37A1 1 0 0 1 2.291 9H21.71a1 1 0 0 1 .978 1.208l-2.17 10.208A2 2 0 0 1 18.562 22H5.438a2 2 0 0 1-1.956-1.584l-2.17-10.208a1 1 0 0 1 .201-.837zM12 17.834c1.933 0 3.5-1.044 3.5-2.333 0-1.289-1.567-2.333-3.5-2.333S8.5 14.21 8.5 15.5c0 1.289 1.567 2.333 3.5 2.333z"
+                    fill="white"></path>
+            </symbol>
+
+            <symbol id="browse-hollow">
+                <path d="M15 15.5c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"></path>
+                <path
+                    d="M1.513 9.37A1 1 0 0 1 2.291 9h19.418a1 1 0 0 1 .979 1.208l-2.339 11a1 1 0 0 1-.978.792H4.63a1 1 0 0 1-.978-.792l-2.339-11a1 1 0 0 1 .201-.837zM3.525 11l1.913 9h13.123l1.913-9H3.525zM4 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4h-2V3H6v3H4V2z">
+                </path>
+            </symbol>
+
+            <symbol id="library">
+                <path
+                    d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z">
+                </path>
+            </symbol>
+
+            <symbol id="library-filled">
+                <path
+                    d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z" fill="white">
+                </path>
+            </symbol>
+
+            <symbol id="plus">
+                <path
+                    d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z">
+                </path>
+            </symbol>
+
+            <symbol id="language">
+                <path
+                    d="M8.152 16H8a8 8 0 1 1 .152 0zm-.41-14.202c-.226.273-.463.713-.677 1.323-.369 1.055-.626 2.496-.687 4.129h3.547c-.06-1.633-.318-3.074-.687-4.129-.213-.61-.45-1.05-.676-1.323-.194-.235-.326-.285-.385-.296h-.044c-.055.007-.19.052-.391.296zM4.877 7.25c.062-1.771.34-3.386.773-4.624.099-.284.208-.554.329-.806a6.507 6.507 0 0 0-4.436 5.43h3.334zm-3.334 1.5a6.507 6.507 0 0 0 4.436 5.43 7.974 7.974 0 0 1-.33-.806c-.433-1.238-.71-2.853-.772-4.624H1.543zm4.835 0c.061 1.633.318 3.074.687 4.129.214.61.451 1.05.677 1.323.202.244.336.29.391.297l.044-.001c.06-.01.19-.061.385-.296.226-.273.463-.713.676-1.323.37-1.055.626-2.496.687-4.129H6.378zm5.048 0c-.061 1.771-.339 3.386-.772 4.624-.082.235-.171.46-.268.674a6.506 6.506 0 0 0 4.071-5.298h-3.03zm3.031-1.5a6.507 6.507 0 0 0-4.071-5.298c.097.214.186.44.268.674.433 1.238.711 2.853.772 4.624h3.031z">
+                </path>
+            </symbol>
+
+        </defs>
+    </svg>
+
+    <!-- loader -->
+    <div class="loader-wrapper">
+        <div class="equalizer">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </div>
+
+    <div class="topBar flex justify-between items-center">
+        <div class="spotify user-select-none">
+            <img src="SVG/spotifyLogo.svg" alt="Spotify logo">
+        </div>
+        <div class="search flex justify-center items-center">
+            <div class="home relative">
+                <button class="home-btn hover-scale">
+                    <svg height="24" viewBox="0 0 24 24">
+                        <use class="home-btn-use-svg" href="#home-filled"></use>
+                    </svg>
+                </button>
+                <div class="btn-label label-home">Home</div>
+            </div>
+            <div class="search-bar flex user-select-none">
+                <button class="search-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" data-encore-id="icon" role="img" width="23"
+                        aria-hidden="true" data-testid="search-icon" class="Svg-sc-ytk21e-0 bHdpig M9l40ptEBXPm03dU3X1k"
+                        viewBox="0 0 24 24">
+                        <path class="search-svg"
+                            d="M10.533 1.27893C5.35215 1.27893 1.12598 5.41887 1.12598 10.5579C1.12598 15.697 5.35215 19.8369 10.533 19.8369C12.767 19.8369 14.8235 19.0671 16.4402 17.7794L20.7929 22.132C21.1834 22.5226 21.8166 22.5226 22.2071 22.132C22.5976 21.7415 22.5976 21.1083 22.2071 20.7178L17.8634 16.3741C19.1616 14.7849 19.94 12.7634 19.94 10.5579C19.94 5.41887 15.7138 1.27893 10.533 1.27893ZM3.12598 10.5579C3.12598 6.55226 6.42768 3.27893 10.533 3.27893C14.6383 3.27893 17.94 6.55226 17.94 10.5579C17.94 14.5636 14.6383 17.8369 10.533 17.8369C6.42768 17.8369 3.12598 14.5636 3.12598 10.5579Z">
+                        </path>
+                    </svg>
+                </button>
+                <input class="search-input" type="search" placeholder="Search Albums/Artists">
+                <button class="browse-btn flex justify-center items-center color-gray relative user-select-none">
+                    <p>|</p>
+                    <svg height="25" fill="rgb(179,179,179)" viewBox="0 0 24 24">
+                        <use class="browse-btn-use-svg" href="#browse-hollow"></use>
+                    </svg>
+                    <div class="btn-label label-browse">Browse</div>
+                </button>
+            </div>
+            <div class="show-library">
+                <button class="show-library-btn hover-scale">
+                    <svg height="24" viewBox="0 0 24 24" fill="rgb(179,179,179)">
+                        <use class="show-library-btn-svg"  href="#library"></use>
+                    </svg>
+            </div>
+        </div>
+        <div class="logIn flex justify-between items-center user-select-none">
+            <button class="signUp-btn hover-scale color-gray flex justify-center items-center">
+                Sign up
+            </button>
+            <button class="logIn-btn hover-scale flex justify-center items-center">
+                Log in
+            </button>
+        </div>
+    </div>
+    <div class="container flex justify-between">
+        <div class="left flex column">
+            <div class="library flex justify-between items-center user-select-none">
+                <button class="library-btn color-gray flex justify-center items-center relative">
+                    <svg height="25" fill="rgb(179,179,179)" viewBox="0 0 24 24">
+                        <use class="library-btn-use-svg" href="#library"></use>
+                    </svg>
+                    <p class="library-txt">Current Playlist</p>
+                    <div class="btn-label label-library">
+                        Collapse Your Playlist
+                    </div>
+                </button>
+                <button class="create-playlist-btn flex justify-center items-center relative">
+                    <svg height="16" fill="rgb(179,179,179)" viewBox="0 0 16 16">
+                        <use class="plus-btn-use-svg" href="#plus"></use>
+                    </svg>
+                    <div class="btn-label label-create-playlist">
+                        Create Playlist
+                    </div>
+                </button>
+            </div>
+            <div class="songs-list flex column user-select-none">
+                <ul>
+                </ul>
+            </div>
+        </div>
+        <div class="right border user-select-none">
+            <div class="right1 flex column">
+                <div class="popular-albums card-container-outer">
+                    <div class="card-container-top flex justify-between">
+                        <span>
+                            <h2>Popular albums and singles</h2>
+                        </span>
+                        <span class="show-all color-gray">Show all</span>
+                    </div>
+                    <div class="card-container grid-auto-row-zero">
+                    </div>
+                </div>
+                <div class="popular-artists card-container-outer">
+                    <div class="card-container-top flex justify-between">
+                        <span>
+                            <h2>Popular Artists</h2>
+                        </span>
+                        <span class="show-all color-gray">Show all</span>
+                    </div>
+                    <div class="card-container grid-auto-row-zero">
+                    </div>
+                </div>
+            </div>
+            <div class="right2 hide border">
+                <h2>Browse all</h2>
+            </div>
+            <div class="right-footer">
+                <div class="right-footer1 flex justify-between">
+                    <div class="right-footer-child">
+                        <ul>
+                            <p>Company</p>
+                            <a href="https://www.spotify.com/np-en/about-us/contact/">About</a>
+                            <a href="https://www.lifeatspotify.com/">Jobs</a>
+                            <a href="https://newsroom.spotify.com/">For the Record</a>
+                        </ul>
+                    </div>
+                    <div class="right-footer-child">
+                        <ul>
+                            <p>Communities</p>
+                            <a href="https://artists.spotify.com/">For Artists</a>
+                            <a href="https://developer.spotify.com/">Developers</a>
+                            <a href="https://ads.spotify.com/">Advertising</a>
+                            <a href="https://investors.spotify.com/">Investors</a>
+                            <a href="https://spotifyforvendors.com/">Vendors</a>
+                        </ul>
+                    </div>
+                    <div class="right-footer-child">
+                        <ul>
+                            <p>Useful links</p>
+                            <a href="https://support.spotify.com/">Support</a>
+                            <a href="https://www.spotify.com/np-en/free/">Free Mobile App</a>
+                        </ul>
+                    </div>
+                    <div class="right-footer-child">
+                        <ul>
+                            <p>Spotify Plans</p>
+                            <a href="https://www.spotify.com/np-en/premium/#ref=spotifycom_footer_premium_individual">Premium
+                                Individual</a>
+                            <a href="https://www.spotify.com/np-en/duo/#ref=spotifycom_footer_premium_duo">Premium
+                                Duo</a>
+                            <a href="https://www.spotify.com/np-en/family/#ref=spotifycom_footer_premium_family">Premium
+                                Family</a>
+                            <a href="https://www.spotify.com/np-en/student/#ref=spotifycom_footer_premium_student">Premium
+                                Student</a>
+                            <a href="https://www.spotify.com/np-en/free/#ref=spotifycom_footer_free">Spotify Free</a>
+                        </ul>
+                    </div>
+                    <div class="right-footer-child-svg flex justify-center">
+                        <span><a target="_main1" href="https://www.instagram.com/spotify/">
+                                <img src="SVG/instagram.svg" alt="instagram">
+                            </a></span>
+                        <span><a target="_main2" href="https://x.com/spotify?mx=2">
+                                <img src="SVG/twitter.svg" alt="twitter">
+                            </a></span>
+                        <span><a target="_main3" href="https://www.facebook.com/Spotify">
+                                <img src="SVG/facebook.svg" alt="facebook">
+                            </a></span>
+                    </div>
+                </div>
+                <hr>
+                <div class="right-footer2 flex justify-between">
+                    <div class="right-footer-link flex">
+                        <div><a href="https://www.spotify.com/np-en/legal"><span>Legal</span></div>
+                        <div><a href="https://www.spotify.com/np-en/safetyandprivacy/"><span>Safety &amp; Privacy
+                                    Center</span></a></div>
+                        <div><a href="https://www.spotify.com/np-en/legal/privacy-policy/"><span>Privacy
+                                    Policy</span></a>
+                        </div>
+                        <div><a href="https://www.spotify.com/np-en/legal/cookies-policy/"><span>Cookies</span></a>
+                        </div>
+                        <div><a href="https://www.spotify.com/np-en/legal/privacy-policy/#s3"><span>About Ads</span></a>
+                        </div>
+                        <div><a href="https://www.spotify.com/np-en/accessibility/"><span>Accessibility</span></a></div>
+                    </div>
+                    <div class="right-footer-language">
+                        <button class="language-btn flex hover-scale">
+                            <svg fill="white" height="16" viewBox="0 0 16 16">
+                                <use class="plus-btn-use-svg" href="#language"></use>
+                            </svg>
+                            English
+                        </button>
+                    </div>
+                </div>
+                <p>© 2025 Spotify AB</p>
+            </div>
+        </div>
+    </div>
+    <div class="bottom relative">
+        <div class="song-info flex justify-start items-center user-select-none">
+        </div>
+        <div class="song-interact flex column justify-center items-center">
+            <div class="song-buttons flex justify-center items-center user-select-none ">
+                <img class="hover-scale hover-white pointer" id="previous" src="SVG/prev-song.svg" alt="">
+                <img width="18" class="hover-scale hover-white pointer" id="play" src="SVG/play.svg" alt="">
+                <img class="hover-scale hover-white pointer" id="next" src="SVG/next-song.svg" alt="">
+            </div>
+            <div class="seek-bar flex justify-between items-center user-select-none">
+                <span class="current-time hide"></span>
+                <div class="seek-bar-inner relative">
+                    <div class="seek-bar-progress">
+                        <div class="seek-pointer hide"></div>
+                    </div>
+                    <div class="btn-label label-seek-bar-inner"></div>
+                </div>
+                <span class="total-duration hide"></span>
+            </div>
+        </div>
+        <div class="volume-bar flex justify-center items-center user-select-none">
+            <img class="" id="volume" src="SVG/volume.svg" alt="">
+            <div class="volume-bar-inner relative">
+                <!-- <div class="volume-bar-progress">
+                        <div class="volume-pointer hide"></div>
+                    </div> -->
+                <input type="range" class="volume-bar-progress pointer hide" min="0" max="100" value="">
+                <div class="volume-bar-progress-value"></div>
+            </div>
+            <span class="volumeValue"></span>
+        </div>
+        <div class="bottom-loader stop hide"></div>
+    </div>
+    <script src="/resources/scriptN.js" defer></script>
+</body>
+
+</html>
